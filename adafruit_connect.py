@@ -1,13 +1,15 @@
-import sys
 from Adafruit_IO import Client
 import Config
-import main_desk
 from time import sleep
+import databse_connect
+
 ADAFRUIT_IO_KEY = Config.ADAFRUIT_IO_KEY
 ADAFRUIT_IO_USERNAME = Config.ADAFRUIT_IO_USERNAME
-FEED_ID =main_desk.FEED_ID
-
+FEED_ID =databse_connect.get_feed_id()
+print(FEED_ID)
 aio = Client(ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY)
+
+
 # Connect to the Adafruit IO server.
 def get_data(FEED_ID,delay):
     data_dict={}
@@ -20,3 +22,4 @@ def get_data(FEED_ID,delay):
         return data_dict
     except:
         return 501
+print(get_data(FEED_ID,2))
