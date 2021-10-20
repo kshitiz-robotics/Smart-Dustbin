@@ -1,0 +1,43 @@
+int out_pin =3;
+int Detect= LOW;//whether detected as per state of sensor or not
+int count=0;
+int val_of_outPin=0; //the value of output pin from pin 3.
+int mist = 13;
+
+
+
+void setup() {
+  // put your setup code here, to run once:
+
+pinMode(out_pin, INPUT);
+pinMode(mist, OUTPUT);
+Serial.begin(9600);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+val_of_outPin= digitalRead(out_pin);
+if(val_of_outPin==HIGH){
+ 
+  if(Detect==LOW){
+    count=count+1;
+    Serial.print(count);
+    Serial.println(" Motions Detected");
+    
+   
+    Detect=HIGH;
+  }
+  
+ digitalWrite(mist,HIGH);
+ delay(3000);
+}
+else{
+ 
+  if(Detect==HIGH){
+    Serial.println("Motion Ended");
+    Detect= LOW;
+  }
+  digitalWrite(mist,LOW);
+  delay(1000);
+}
+}
